@@ -1,0 +1,30 @@
+#outputText {
+    text-area-background: #000000;
+    -fx-highlight-fill: #ffffff;
+    -fx-highlight-text-fill: #ffffff;
+    -fx-text-fill: #ffffff;
+}
+
+#outputText .content {
+    -fx-background-color: text-area-background;
+}
+
+.paragraph-box {
+    -fx-font-family: monospace;
+}
+
+.keyword {
+    -fx-fill: blue;
+}
+
+.arithmetic {
+    -fx-fill: red;
+}
+
+.boolean {
+    -fx-fill: red;
+}
+
+.string {
+    -fx-fill: green;
+}

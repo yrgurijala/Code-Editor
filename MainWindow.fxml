@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.fxmisc.richtext.CodeArea?>
+<?import org.fxmisc.flowless.VirtualizedScrollPane?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bs.code.MainController" stylesheets="@Editor.css">
+    <AnchorPane prefHeight="6.0" prefWidth="640.0">
+        <children>
+            <MenuBar prefHeight="21.0" prefWidth="595.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <Menu mnemonicParsing="false" text="File">
+                    <MenuItem mnemonicParsing="false" onAction="#saveAsPrompt" text="New"/>
+                    <MenuItem mnemonicParsing="false" onAction="#newFilePrompt" text="New File"/>
+                    <MenuItem fx:id="openMenuItem" mnemonicParsing="false" onAction="#openPrompt" text="Open…"/>
+                    <Menu mnemonicParsing="false" text="Open Recent"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close"/>
+                    <MenuItem mnemonicParsing="false" onAction="#savePrompt" text="Save"/>
+                    <MenuItem mnemonicParsing="false" onAction="#saveAsPrompt" text="Save As…"/>
+                    <MenuItem mnemonicParsing="false" text="Revert"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem mnemonicParsing="false" text="Preferences…"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit"/>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit" onShowing="#checkMenu">
+                    <MenuItem fx:id="undoButton" mnemonicParsing="false" text="Undo" onAction="#undo"/>
+                    <MenuItem fx:id="redoButton" mnemonicParsing="false" text="Redo" onAction="#redo"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem fx:id="cutButton" mnemonicParsing="false" text="Cut" onAction="#cut"/>
+                    <MenuItem fx:id="copyButton" mnemonicParsing="false" text="Copy" onAction="#copy"/>
+                    <MenuItem fx:id="pasteButton" mnemonicParsing="false" text="Paste" onAction="#paste"/>
+                    <MenuItem fx:id="deleteButton" mnemonicParsing="false" text="Delete" onAction="#delete"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem fx:id="selectAllButton" mnemonicParsing="false" text="Select All"
+                              onAction="#selectAll"/>
+                    <MenuItem fx:id="deselectAllButton" mnemonicParsing="false" text="Deselect All"
+                              onAction="#deselectAll"/>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Run">
+                    <MenuItem mnemonicParsing="false" text="Build" onAction="#buildPrompt"/>
+                    <MenuItem mnemonicParsing="false" text="Run" onAction="#runPrompt" />
+                    <MenuItem mnemonicParsing="false" text="Debug" onAction="#debugPrompt" />
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
+                </Menu>
+            </MenuBar>
+        </children>
+    </AnchorPane>
+    <AnchorPane prefHeight="366.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+        <children>
+            <SplitPane dividerPositions="0.25" prefHeight="375.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0"
+                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TitledPane fx:id="projectExplorerTitle" animated="false" prefHeight="373.0" prefWidth="157.0"
+                                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="325.0" prefWidth="155.0">
+                                    <children>
+                                        <TreeView fx:id="projectExplorer" layoutX="19.6" layoutY="-1.4000000000000004"
+                                                  prefHeight="347.0" prefWidth="138.0" AnchorPane.bottomAnchor="0.0"
+                                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                  AnchorPane.topAnchor="0.0">
+                                        </TreeView>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </TitledPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" maxHeight="Infinity">
+                    <children>
+                        <AnchorPane fx:id="editorAnchorPane"
+                                    AnchorPane.topAnchor="0.0"
+                                    AnchorPane.bottomAnchor="0.0"
+                                    AnchorPane.leftAnchor="0.0"
+                                    AnchorPane.rightAnchor="0.0">
+                            <children>
+                                <TabPane fx:id="tabPane" tabClosingPolicy="SELECTED_TAB"
+                                         AnchorPane.bottomAnchor="0.0"
+                                         AnchorPane.leftAnchor="0.0"
+                                         AnchorPane.rightAnchor="0.0"
+                                         AnchorPane.topAnchor="0.0"
+                                         maxHeight="Infinity">
+                                    <tabs>
+                                    </tabs>
+                                </TabPane>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+            </SplitPane>
+        </children>
+    </AnchorPane>
+    <AnchorPane prefHeight="25.0">
+        <TitledPane fx:id="statsPanel" animated="false" text="0 keyword(s)" collapsible="false" prefWidth="Infinity">
+        </TitledPane>
+    </AnchorPane>
+</VBox>
